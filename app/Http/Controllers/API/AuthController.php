@@ -21,10 +21,9 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
-        ]);
+        ])->givePermissionTo('user');
 
-
-        return response()->json(['successfully registered user'], 200);
+        return response()->json(['message' => 'successfully registered user', 'user' => $user], 200);
     }
 
     public function login(Request $request)
@@ -41,7 +40,7 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        return response()->json(['user' => auth()->user(), 'access_token' => $accessToken]);
     }
 
     public function logout(Request $request)

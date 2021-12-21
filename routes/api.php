@@ -26,5 +26,5 @@ Route::group([
     Route::post('/login', 'API\AuthController@login')->name('login.api');
     Route::post('/register', 'API\AuthController@register')->name('register.api');
     Route::get('/logout', 'API\AuthController@logout')->middleware('auth:api');
-    Route::apiResource('/rules', 'API\RulesController')->middleware('auth:api');
+    Route::apiResource('/user', 'API\UserController')->middleware('auth:api');
 });
